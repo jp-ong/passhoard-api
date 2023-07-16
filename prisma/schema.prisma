@@ -16,9 +16,9 @@ model User {
   email    String @unique
   password String
 
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  Credential      Credential[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   CredentialGroup CredentialGroup[]
 }
 
@@ -39,9 +39,7 @@ model Credential {
   identifier String
   password   String
 
-  ownerId           String
   credentialGroupId String
-  owner             User            @relation(references: [id], fields: [ownerId])
   credentialGroup   CredentialGroup @relation(references: [id], fields: [credentialGroupId])
 
   createdAt DateTime @default(now())
