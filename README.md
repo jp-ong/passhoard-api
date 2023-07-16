@@ -1,8 +1,8 @@
 # Passhoard API
 
-##### User Stories
+### User Stories
 
-User must be able to:
+##### User must be able to:
 
 - [ ] Register with an email and password.
 - [ ] Login with a registered email and password.
@@ -14,7 +14,7 @@ User must be able to:
 - [ ] Update a credential group's name.
 - [ ] Delete a credential group along with its credentials.
 
-##### Requirements
+### Requirements
 
 - [ ] User account password must be hashed.
 - [ ] Credential identifiers must be encrypted.
