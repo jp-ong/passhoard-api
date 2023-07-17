@@ -20,6 +20,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   CredentialGroup CredentialGroup[]
+  Credential      Credential[]
 }
 
 model CredentialGroup {
@@ -41,6 +42,8 @@ model Credential {
 
   credentialGroupId String
   credentialGroup   CredentialGroup @relation(references: [id], fields: [credentialGroupId])
+  ownerId           String
+  owner             User            @relation(references: [id], fields: [ownerId])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

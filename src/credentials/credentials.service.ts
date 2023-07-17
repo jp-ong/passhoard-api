@@ -23,11 +23,14 @@ export class CredentialsService {
 
       if (!exists) return new BadRequestException().getResponse();
 
+      const newCredentials: Credential[] = dto.credentials.map((c) => ({
+        ...c,
+        credentialGroupId: dto.credentialGroupId,
+        ownerId: user.id,
+      }));
+
       const credentials = await this.prisma.credential.createMany({
-        data: dto.credentials.map((c) => ({
-          ...c,
-          credentialGroupId: dto.credentialGroupId,
-        })),
+        data: newCredentials,
       });
 
       return credentials;

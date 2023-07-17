@@ -25,8 +25,8 @@ CREATE TABLE "Credential" (
     "id" TEXT NOT NULL,
     "identifier" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "ownerId" TEXT NOT NULL,
     "credentialGroupId" TEXT NOT NULL,
+    "ownerId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -43,7 +43,7 @@ CREATE UNIQUE INDEX "CredentialGroup_name_key" ON "CredentialGroup"("name");
 ALTER TABLE "CredentialGroup" ADD CONSTRAINT "CredentialGroup_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Credential" ADD CONSTRAINT "Credential_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Credential" ADD CONSTRAINT "Credential_credentialGroupId_fkey" FOREIGN KEY ("credentialGroupId") REFERENCES "CredentialGroup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Credential" ADD CONSTRAINT "Credential_credentialGroupId_fkey" FOREIGN KEY ("credentialGroupId") REFERENCES "CredentialGroup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Credential" ADD CONSTRAINT "Credential_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
