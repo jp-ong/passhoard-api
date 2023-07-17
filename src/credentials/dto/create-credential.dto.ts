@@ -1,6 +1,6 @@
 import { Credential } from '@prisma/client';
 
-export class InitCredentialsDto {
-  credentialGroupName: string;
+export class CreateCredentialDto {
+  credentialGroupId: string;
   credentials: Credential[];
 }

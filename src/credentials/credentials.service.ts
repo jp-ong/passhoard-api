@@ -1,36 +1,36 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 import { PrismaService } from 'src/prisma/prisma.service';
-import { InitCredentialsDto } from './dto/init-credentials.dto';
+import { CreateCredentialDto } from './dto/create-credential.dto';
 import { User, Credential } from '@prisma/client';
+import { error } from 'console';
 
 @Injectable()
 export class CredentialsService {
   constructor(private prisma: PrismaService) {}
 
-  async initCredentials(user: User, initCredentialsDto: InitCredentialsDto) {
+  async createCredentials(dto: CreateCredentialDto, user: User) {
     try {
-      const credentialGroup = await this.prisma.credentialGroup.create({
-        data: {
-          name: initCredentialsDto.credentialGroupName,
-          ownerId: user.id,
-        },
+      const exists = await this.prisma.credentialGroup.findUnique({
+        where: { ownerId: user.id, id: dto.credentialGroupId },
       });
 
-      const credentials = initCredentialsDto.credentials.map(
-        (c: Credential) => ({
-          ...c,
-          credentialGroupId: credentialGroup.id,
-        }),
-      );
+      if (!exists) return new BadRequestException().getResponse();
 
-      await this.prisma.credential.createMany({ data: credentials });
+      const credentials = await this.prisma.credential.createMany({
+        data: dto.credentials.map((c) => ({
+          ...c,
+          credentialGroupId: dto.credentialGroupId,
+        })),
+      });
+
+      return credentials;
     } catch (error) {
-      let message: string = 'Something went wrong.';
-      if (error.code === 'P2002') {
-        message = `"${initCredentialsDto.credentialGroupName}" group already exists.`;
-      }
-      throw new BadRequestException(message);
+      throw new InternalServerErrorException();
     }
   }
 }

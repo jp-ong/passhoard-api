@@ -1,9 +1,7 @@
 import {
   Body,
   Controller,
-  Get,
   HttpCode,
-  Param,
   Post,
   Req,
   UseGuards,
@@ -11,7 +9,7 @@ import {
 import { Request } from 'express';
 
 import { CredentialsService } from './credentials.service';
-import { InitCredentialsDto } from './dto/init-credentials.dto';
+import { CreateCredentialDto } from './dto/create-credential.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
 
@@ -19,16 +17,10 @@ import { User } from '@prisma/client';
 export class CredentialsController {
   constructor(private readonly credentialsService: CredentialsService) {}
 
-  @Post('init')
+  @Post()
   @HttpCode(201)
   @UseGuards(AuthGuard('jwt'))
-  initCredentials(
-    @Req() req: Request,
-    @Body() initCredentialsDto: InitCredentialsDto,
-  ) {
-    return this.credentialsService.initCredentials(
-      <User>req.user,
-      initCredentialsDto,
-    );
+  createCredentials(@Req() req: Request, @Body() dto: CreateCredentialDto) {
+    return this.credentialsService.createCredentials(dto, <User>req.user);
   }
 }
