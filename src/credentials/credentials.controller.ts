@@ -6,15 +6,17 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { Request } from 'express';
 
 import { CredentialsService } from './credentials.service';
-import { CreateCredentialDto } from './dto/create-credential.dto';
+import { CreateCredentialsDto } from './dto/create-credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
+import { UpdateCredentialsDto } from './dto/update-credentials.dto';
 
 @Controller('credentials')
 export class CredentialsController {
@@ -23,7 +25,7 @@ export class CredentialsController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(AuthGuard('jwt'))
-  createCredentials(@Req() req: Request, @Body() dto: CreateCredentialDto) {
+  createCredentials(@Req() req: Request, @Body() dto: CreateCredentialsDto) {
     return this.credentialsService.createCredentials(dto, <User>req.user);
   }
 
@@ -32,5 +34,11 @@ export class CredentialsController {
   @UseGuards(AuthGuard('jwt'))
   deleteCredential(@Param() params: any) {
     return this.credentialsService.deleteCredential(params.id);
+  }
+
+  @Put('')
+  @UseGuards(AuthGuard('jwt'))
+  updateCredentials(@Req() req: Request, @Body() dto: UpdateCredentialsDto) {
+    return this.credentialsService.updateCredentials(dto, <User>req.user);
   }
 }
