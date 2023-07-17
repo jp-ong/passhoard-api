@@ -25,10 +25,10 @@ export class CredentialGroupsController {
   @UseGuards(AuthGuard('jwt'))
   createCredentialGroup(
     @Req() req: Request,
-    @Body() createCredentialGroupDto: CreateCredentialGroupDto,
+    @Body() dto: CreateCredentialGroupDto,
   ) {
     return this.credentialGroupService.createCredentialGroup(
-      createCredentialGroupDto,
+      dto,
       <User>req.user,
     );
   }
