@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  HttpStatus,
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
@@ -8,6 +9,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateCredentialDto } from './dto/create-credential.dto';
 import { User, Credential } from '@prisma/client';
 import { error } from 'console';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class CredentialsService {
@@ -30,6 +32,19 @@ export class CredentialsService {
 
       return credentials;
     } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
+  async deleteCredential(id: string) {
+    try {
+      await this.prisma.credential.delete({ where: { id } });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        if (error.code === 'P2025') {
+          return;
+        }
+      }
       throw new InternalServerErrorException();
     }
   }

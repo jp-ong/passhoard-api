@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   HttpCode,
+  HttpStatus,
+  Param,
   Post,
   Req,
   UseGuards,
@@ -18,9 +21,16 @@ export class CredentialsController {
   constructor(private readonly credentialsService: CredentialsService) {}
 
   @Post()
-  @HttpCode(201)
+  @HttpCode(HttpStatus.CREATED)
   @UseGuards(AuthGuard('jwt'))
   createCredentials(@Req() req: Request, @Body() dto: CreateCredentialDto) {
     return this.credentialsService.createCredentials(dto, <User>req.user);
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(AuthGuard('jwt'))
+  deleteCredential(@Param() params: any) {
+    return this.credentialsService.deleteCredential(params.id);
   }
 }
