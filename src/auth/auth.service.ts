@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 
@@ -30,6 +30,10 @@ export class AuthService {
     const user = await this.prisma.user.findUnique({
       where: { email: loginDto.email },
     });
+
+    if (!user) {
+      throw new UnauthorizedException();
+    }
 
     const token = this.signToken({ id: user.id, email: user.email });
     return token;
