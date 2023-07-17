@@ -1,6 +1,18 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import { Request } from 'express';
 
 import { CredentialGroupsService } from './credential-groups.service';
+import { CreateCredentialGroupDto } from './create-credential-group.dto';
+import { User } from '@prisma/client';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('credential-groups')
 export class CredentialGroupsController {
@@ -9,12 +21,15 @@ export class CredentialGroupsController {
   ) {}
 
   @Post()
-  createCredentialGroup() {
-    return this.credentialGroupService.createCredentialGroup();
-  }
-
-  @Get()
-  getCredentialGroups() {
-    return this.credentialGroupService.getCredentialGroups();
+  @HttpCode(HttpStatus.CREATED)
+  @UseGuards(AuthGuard('jwt'))
+  createCredentialGroup(
+    @Req() req: Request,
+    @Body() createCredentialGroupDto: CreateCredentialGroupDto,
+  ) {
+    return this.credentialGroupService.createCredentialGroup(
+      createCredentialGroupDto,
+      <User>req.user,
+    );
   }
 }
