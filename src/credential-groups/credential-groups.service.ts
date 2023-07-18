@@ -8,7 +8,7 @@ import { User } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCredentialGroupDto } from './create-credential-group.dto';
+import { CreateCredentialGroupDto } from './dto/create-credential-group.dto';
 import { UpdateCredentialGroupDto } from './dto/update-credential-group.dto';
 
 @Injectable()

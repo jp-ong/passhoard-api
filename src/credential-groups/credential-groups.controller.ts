@@ -16,7 +16,7 @@ import { User } from '@prisma/client';
 import { AuthGuard } from '@nestjs/passport';
 
 import { CredentialGroupsService } from './credential-groups.service';
-import { CreateCredentialGroupDto } from './create-credential-group.dto';
+import { CreateCredentialGroupDto } from './dto/create-credential-group.dto';
 import { UpdateCredentialGroupDto } from './dto/update-credential-group.dto';
 
 @Controller('credential-groups')
