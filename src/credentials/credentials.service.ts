@@ -52,7 +52,6 @@ export class CredentialsService {
   }
 
   async updateCredentials(dto: UpdateCredentialsDto, user: User) {
-    console.log(user.id);
     try {
       await Promise.all(
         dto.credentials.map(async (c) => {
@@ -63,7 +62,6 @@ export class CredentialsService {
         }),
       );
     } catch (error) {
-      console.log(error);
       throw new InternalServerErrorException();
     }
   }
