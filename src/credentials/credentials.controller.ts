@@ -1,13 +1,14 @@
 import {
-  Body,
   Controller,
-  Delete,
-  HttpCode,
-  HttpStatus,
-  Param,
+  Get,
   Post,
   Put,
+  Delete,
+  Body,
   Req,
+  Param,
+  HttpCode,
+  HttpStatus,
   UseGuards,
 } from '@nestjs/common';
 import { Request } from 'express';
@@ -22,6 +23,16 @@ import { UpdateCredentialsDto } from './dto/update-credentials.dto';
 @Controller('credentials')
 export class CredentialsController {
   constructor(private readonly credentialsService: CredentialsService) {}
+
+  @Get(':credentialGroupId')
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard('jwt'))
+  getCredentials(@Req() req: Request, @Param() params: any) {
+    return this.credentialsService.getCredentials(
+      params.credentialGroupId,
+      <User>req.user,
+    );
+  }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
