@@ -1,14 +1,15 @@
 import {
-  Body,
   Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Req,
+  Param,
+  Body,
+  UseGuards,
   HttpCode,
   HttpStatus,
-  Post,
-  Req,
-  UseGuards,
-  Put,
-  Param,
-  Delete,
 } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -24,6 +25,13 @@ export class CredentialGroupsController {
   constructor(
     private readonly credentialGroupService: CredentialGroupsService,
   ) {}
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard('jwt'))
+  getCredentialGroups(@Req() req: Request) {
+    return this.credentialGroupService.getCredentialGroups(<User>req.user);
+  }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)

@@ -15,6 +15,17 @@ import { UpdateCredentialGroupDto } from './dto/update-credential-group.dto';
 export class CredentialGroupsService {
   constructor(private prisma: PrismaService) {}
 
+  async getCredentialGroups(user: User) {
+    try {
+      const credentialGroups = await this.prisma.credentialGroup.findMany({
+        where: { ownerId: user.id },
+      });
+      return credentialGroups;
+    } catch (error) {
+      throw new InternalServerErrorException();
+    }
+  }
+
   async createCredentialGroup(dto: CreateCredentialGroupDto, user: User) {
     try {
       const credentialGroup = await this.prisma.credentialGroup.create({
