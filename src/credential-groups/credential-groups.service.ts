@@ -49,4 +49,22 @@ export class CredentialGroupsService {
       throw new InternalServerErrorException();
     }
   }
+
+  async deleteCredentialGroup(id: string, user: User) {
+    try {
+      await this.prisma.credential.deleteMany({
+        where: { credentialGroupId: id, ownerId: user.id },
+      });
+      await this.prisma.credentialGroup.delete({
+        where: { id, ownerId: user.id },
+      });
+    } catch (error) {
+      if (error instanceof PrismaClientKnownRequestError) {
+        if (error.code === 'P2025') {
+          return;
+        }
+      }
+      throw new InternalServerErrorException();
+    }
+  }
 }

@@ -8,6 +8,7 @@ import {
   UseGuards,
   Put,
   Param,
+  Delete,
 } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -46,6 +47,16 @@ export class CredentialGroupsController {
   ) {
     return this.credentialGroupService.updateCredentialGroup(
       dto,
+      <User>req.user,
+    );
+  }
+
+  @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  @UseGuards(AuthGuard('jwt'))
+  deleteCredentialGroup(@Req() req: Request, @Param() params: any) {
+    return this.credentialGroupService.deleteCredentialGroup(
+      params.id,
       <User>req.user,
     );
   }
