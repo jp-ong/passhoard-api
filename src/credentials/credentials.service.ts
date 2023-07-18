@@ -4,10 +4,11 @@ import {
   InternalServerErrorException,
 } from '@nestjs/common';
 
-import { PrismaService } from 'src/prisma/prisma.service';
-import { CreateCredentialsDto } from './dto/create-credentials.dto';
 import { User, Credential } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+
+import { PrismaService } from 'src/prisma/prisma.service';
+import { CreateCredentialsDto } from './dto/create-credentials.dto';
 import { UpdateCredentialsDto } from './dto/update-credentials.dto';
 
 @Injectable()

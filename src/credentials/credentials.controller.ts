@@ -12,10 +12,11 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 
-import { CredentialsService } from './credentials.service';
-import { CreateCredentialsDto } from './dto/create-credentials.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from '@prisma/client';
+
+import { CredentialsService } from './credentials.service';
+import { CreateCredentialsDto } from './dto/create-credentials.dto';
 import { UpdateCredentialsDto } from './dto/update-credentials.dto';
 
 @Controller('credentials')
