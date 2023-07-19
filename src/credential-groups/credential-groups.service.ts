@@ -19,6 +19,7 @@ export class CredentialGroupsService {
     try {
       const credentialGroups = await this.prisma.credentialGroup.findMany({
         where: { ownerId: user.id },
+        orderBy: { name: 'asc' },
       });
       return credentialGroups;
     } catch (error) {
