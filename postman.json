@@ -1,0 +1,414 @@
+{
+	"info": {
+		"_postman_id": "e7a5bb80-b578-4069-a015-cda585138e58",
+		"name": "Passhoard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26573025"
+	},
+	"item": [
+		{
+			"name": "Auth Me",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/me",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"johnpaulong@email.com\",\r\n    \"password\":\"Test1234!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/register",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "asdwq",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"johnpaulong@email.com\",\r\n    \"password\":\"Test1234!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Credential Groups",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/credential-groups/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credential-groups",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Credential Group",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Spotify\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/credential-groups",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credential-groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Credential Group",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":\"d6f1762c-545e-4cf6-97be-8f8d27856a48\",\r\n    \"name\":\"GitHub\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/credential-groups",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credential-groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Credential Group",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/credential-groups/ea0c7c3d-b0a0-4041-978c-ad16fd6ca24d",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credential-groups",
+						"ea0c7c3d-b0a0-4041-978c-ad16fd6ca24d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Credentials",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/credentials/2a4c4e9a-36d5-41f6-81ba-e228dd15b263",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credentials",
+						"2a4c4e9a-36d5-41f6-81ba-e228dd15b263"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Credentials",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"credentialGroupId\": \"ea0c7c3d-b0a0-4041-978c-ad16fd6ca24d\",\r\n    \"credentials\": [\r\n        {\r\n            \"identifier\": \"09173243288\",\r\n            \"password\": \"Jpong1234\"\r\n        },\r\n        {\r\n            \"identifier\": \"09778171966\",\r\n            \"password\": \"Japlong1234\"\r\n        },\r\n        {\r\n            \"identifier\": \"09178911682\",\r\n            \"password\": \"ong1234\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/credentials",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Credentials",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"credentials\": [\r\n        {\r\n            \"id\": \"b34d8b7f-977d-4976-8bfa-b6362524f0fe\",\r\n            \"identifier\": \"jhaako\",\r\n            \"password\": \"new-password-69!\"\r\n        },\r\n        {\r\n            \"id\": \"b9e7784d-24ea-45fc-a28b-1389197d8737\",\r\n            \"identifier\": \"swantik\",\r\n            \"password\": \"new-password-70!\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/credentials",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credentials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Credential",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/credentials/34e3f1de-1806-4e7d-a055-b44c8196f8bd",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"credentials",
+						"34e3f1de-1806-4e7d-a055-b44c8196f8bd"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
